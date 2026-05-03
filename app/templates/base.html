@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ParkMate</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="brand">
+            <a href="/">ParkMate</a>
+        </div>
+
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/spots">Browse Parking</a>
+
+            {% if user %}
+                <a href="/spots/add">Add Spot</a>
+                <a href="/bookings">My Bookings</a>
+                <a href="/dashboard">Dashboard</a>
+                <a href="/logout" class="logout">Logout</a>
+            {% else %}
+                <a href="/login">Login</a>
+                <a href="/register" class="primary-link">Register</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

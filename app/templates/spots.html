@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section-header">
+    <div>
+        <h1>Available Parking Spots</h1>
+        <p class="muted">Search and book parking spaces near your destination.</p>
+    </div>
+</section>
+
+<form class="search-bar" method="get" action="/spots">
+    <input type="text" name="city" placeholder="Search by city" value="{{ city }}">
+    <input type="number" name="max_price" step="0.01" placeholder="Max price/hour" value="{{ max_price }}">
+    <button type="submit" class="btn">Search</button>
+</form>
+
+{% if spots %}
+<div class="grid">
+    {% for spot in spots %}
+    <div class="card">
+        <h3>{{ spot.title }}</h3>
+        <p><strong>Address:</strong> {{ spot.address }}, {{ spot.city }}</p>
+        <p><strong>Price:</strong> ${{ "%.2f"|format(spot.price_per_hour) }}/hour</p>
+        <p>{{ spot.description }}</p>
+
+        {% if user and user.id != spot.owner_id %}
+            <form method="post" action="/book/{{ spot.id }}" class="booking-form">
+                <label>Hours</label>
+                <input type="number" name="hours" value="1" min="1" max="24" required>
+                <button type="submit" class="btn small">Book Now</button>
+            </form>
+        {% elif user and user.id == spot.owner_id %}
+            <p class="muted">This is your own listing.</p>
+        {% else %}
+            <a href="/login" class="btn small">Login to Book</a>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+    <p>No available parking spots found.</p>
+{% endif %}
+{% endblock %}

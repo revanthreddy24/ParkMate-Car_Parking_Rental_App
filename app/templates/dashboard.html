@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Dashboard</h1>
+<p class="muted">Welcome back, {{ user.full_name }}.</p>
+
+<section class="stats">
+    <div class="stat-card">
+        <h2>{{ my_spots|length }}</h2>
+        <p>My Listed Spots</p>
+    </div>
+
+    <div class="stat-card">
+        <h2>{{ my_bookings|length }}</h2>
+        <p>My Bookings</p>
+    </div>
+
+    <div class="stat-card">
+        <h2>{{ owner_booking_count }}</h2>
+        <p>Bookings on My Spots</p>
+    </div>
+</section>
+
+<section class="section-header">
+    <h2>My Parking Spots</h2>
+    <a href="/spots/add" class="btn small">Add New Spot</a>
+</section>
+
+{% if my_spots %}
+    <div class="grid">
+        {% for spot in my_spots %}
+        <div class="card">
+            <h3>{{ spot.title }}</h3>
+            <p><strong>Address:</strong> {{ spot.address }}, {{ spot.city }}</p>
+            <p><strong>Price:</strong> ${{ "%.2f"|format(spot.price_per_hour) }}/hour</p>
+            <p><strong>Status:</strong>
+                {% if spot.is_available %}
+                    <span class="badge success">Available</span>
+                {% else %}
+                    <span class="badge danger">Booked/Unavailable</span>
+                {% endif %}
+            </p>
+            <p>{{ spot.description }}</p>
+
+            <div class="actions">
+                <form method="post" action="/spots/{{ spot.id }}/toggle">
+                    <button class="btn small secondary" type="submit">Toggle Availability</button>
+                </form>
+
+                <form method="post" action="/spots/{{ spot.id }}/delete">
+                    <button class="btn small danger-btn" type="submit">Delete</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>You have not listed any parking spots yet.</p>
+{% endif %}
+{% endblock %}

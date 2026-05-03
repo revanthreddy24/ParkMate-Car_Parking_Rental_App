@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="form-container">
+    <h1>Create Account</h1>
+
+    {% if error %}
+        <div class="error">{{ error }}</div>
+    {% endif %}
+
+    <form method="post" action="/register">
+        <label>Full Name</label>
+        <input type="text" name="full_name" required>
+
+        <label>Email</label>
+        <input type="email" name="email" required>
+
+        <label>Password</label>
+        <input type="password" name="password" required>
+
+        <label>Role</label>
+        <select name="role">
+            <option value="user">Driver</option>
+            <option value="owner">Parking Owner</option>
+        </select>
+
+        <button type="submit" class="btn full">Register</button>
+    </form>
+
+    <p class="small-text">Already have an account? <a href="/login">Login</a></p>
+</div>
+{% endblock %}

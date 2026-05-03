@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero">
+    <div>
+        <h1>Find and Reserve Parking Faster</h1>
+        <p>
+            ParkMate helps drivers discover available parking spaces and allows owners
+            to list private parking spots for easy reservation.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="/spots" class="btn">Browse Parking</a>
+            <a href="/spots/add" class="btn secondary">List Your Spot</a>
+        </div>
+    </div>
+</section>
+
+<section class="stats">
+    <div class="stat-card">
+        <h2>{{ total_spots }}</h2>
+        <p>Total Parking Spots</p>
+    </div>
+
+    <div class="stat-card">
+        <h2>{{ available_spots }}</h2>
+        <p>Available Now</p>
+    </div>
+
+    <div class="stat-card">
+        <h2>{{ total_bookings }}</h2>
+        <p>Total Bookings</p>
+    </div>
+</section>
+
+<section class="info-section">
+    <h2>Why ParkMate?</h2>
+    <div class="grid">
+        <div class="card">
+            <h3>For Drivers</h3>
+            <p>Search available parking spaces by city and price, then book instantly.</p>
+        </div>
+        <div class="card">
+            <h3>For Owners</h3>
+            <p>List unused parking spaces and manage availability from your dashboard.</p>
+        </div>
+        <div class="card">
+            <h3>Real Business Logic</h3>
+            <p>This project demonstrates authentication, CRUD, booking workflows, and database relationships.</p>
+        </div>
+    </div>
+</section>
+{% endblock %}
