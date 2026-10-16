@@ -175,7 +175,6 @@ Built **ParkMate**, a full-stack parking reservation web application using **Fas
 ## Author
 
 **Revanth Reddy**  
-Master’s Student in Computer Science  
 Interested in Python, Backend Development, FastAPI, Data Engineering, Machine Learning, and AI-powered applications.
 
 ---
